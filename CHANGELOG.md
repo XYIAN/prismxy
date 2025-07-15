@@ -1,5 +1,40 @@
 # Changelog
 
+## [0.4.0] - Glossy UI Enhancement
+
+### ✨ Glossy Visual Effects
+
+- **Enhanced Glassmorphism**: Upgraded to `backdrop-blur-xl` with sophisticated shadow systems
+- **Glossy Cards**: New `glass-card-hover` class with enhanced hover animations and depth
+- **Glossy Buttons**: Premium button styling with gradient backgrounds and hover effects
+- **Glossy Borders**: Refined border styling with inset highlights and subtle shadows
+- **Animated Glow Effects**: Added `animate-glow` class for pulsing glow animations
+
+### 🎨 Visual Improvements
+
+- **Sophisticated Shadows**: Multi-layered shadow systems with inset highlights
+- **Premium Gradients**: Enhanced gradient effects for text and backgrounds
+- **Hover Animations**: Smooth transform effects with enhanced shadow transitions
+- **Glossy Navigation**: Enhanced navbar with glossy button styling
+- **Enhanced Scrollbar**: Improved scrollbar with glossy styling and hover effects
+
+### 🔧 Technical Enhancements
+
+- **CSS Classes**: New utility classes for consistent glossy styling
+- **Animation System**: Added glow animation keyframes
+- **Shadow System**: Comprehensive shadow utilities for depth and dimension
+- **Component Updates**: All components updated to use new glossy styling
+- **Performance**: Optimized animations and transitions
+
+### 📱 Component Updates
+
+- **HeroSection**: Enhanced with text gradients and glowing avatar
+- **BadgeSection**: Glossy cards with animated glow effects
+- **ProjectCard**: Premium glassmorphism with enhanced hover states
+- **Navbar**: Glossy navigation with animated logo
+- **ContactSection**: Enhanced contact cards with glossy styling
+- **ThemeSwitcher**: Premium button styling for theme controls
+
 ## [0.3.1] - PrimeReact Theme Update
 
 ### 🎨 Theme Enhancement

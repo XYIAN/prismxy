@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { PortfolioItem } from "@/types";
-import { useTheme } from "@/hooks";
-import Image from "next/image";
+import React, { useState } from 'react';
+import { PortfolioItem } from '@/types';
+import { useTheme } from '@/hooks';
+import Image from 'next/image';
 
 interface ProjectCardProps {
   project: PortfolioItem;
@@ -29,7 +29,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
           fill
           className="object-cover transition-transform duration-500"
           style={{
-            transform: isHovered ? "scale(1.05)" : "scale(1)",
+            transform: isHovered ? 'scale(1.05)' : 'scale(1)',
           }}
         />
         {/* Gradient Overlay */}
@@ -43,10 +43,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
         {/* Project Icon */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div
-            className="w-16 h-16 rounded-full flex items-center justify-center text-3xl backdrop-blur-lg border"
+            className="w-16 h-16 rounded-full flex items-center justify-center text-3xl animate-glow"
             style={{
               backgroundColor: `${currentTheme.primary}20`,
               borderColor: currentTheme.primary,
+              boxShadow: `0 0 20px ${currentTheme.primary}40`,
             }}
           >
             <i className="pi pi-code" style={{ color: currentTheme.primary }} />
@@ -56,24 +57,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
 
       {/* Content Overlay */}
       <div
-        className="absolute inset-0 backdrop-blur-lg border transition-all duration-300"
+        className="absolute inset-0 glass-card-hover"
         style={{
-          backgroundColor: `${currentTheme.surface}${isHovered ? "CC" : "99"}`,
-          borderColor: `${currentTheme.primary}${isHovered ? "40" : "20"}`,
+          backgroundColor: `${currentTheme.surface}${isHovered ? 'CC' : '99'}`,
         }}
       >
         <div className="p-6 h-full flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h3
-                className="text-xl font-bold"
-                style={{ color: currentTheme.text }}
-              >
+              <h3 className="text-xl font-bold" style={{ color: currentTheme.text }}>
                 {project.title}
               </h3>
               {project.featured && (
                 <span
-                  className="px-2 py-1 text-xs rounded-full"
+                  className="px-2 py-1 text-xs rounded-full glossy-button"
                   style={{
                     backgroundColor: currentTheme.accent,
                     color: currentTheme.background,
@@ -84,23 +81,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
               )}
             </div>
 
-            <p
-              className="text-sm mb-4 line-clamp-3"
-              style={{ color: currentTheme.textSecondary }}
-            >
+            <p className="text-sm mb-4 line-clamp-3" style={{ color: currentTheme.textSecondary }}>
               {project.description}
             </p>
           </div>
 
           {/* Technologies */}
           <div className="flex flex-wrap gap-2 mb-4">
-            {project.technologies.slice(0, 3).map((tech) => (
+            {project.technologies.slice(0, 3).map(tech => (
               <span
                 key={tech}
-                className="px-2 py-1 text-xs rounded-full border"
+                className="px-2 py-1 text-xs rounded-full glossy-border"
                 style={{
                   backgroundColor: `${currentTheme.primary}20`,
-                  borderColor: currentTheme.primary,
                   color: currentTheme.primary,
                 }}
               >
@@ -124,12 +117,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 px-3 py-2 text-sm rounded-lg text-center transition-colors"
+                className="flex-1 px-3 py-2 text-sm rounded-lg text-center glossy-button"
                 style={{
                   backgroundColor: currentTheme.primary,
                   color: currentTheme.background,
                 }}
-                onClick={(e) => e.stopPropagation()}
+                onClick={e => e.stopPropagation()}
               >
                 Live Demo
               </a>
@@ -139,12 +132,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 px-3 py-2 text-sm rounded-lg text-center border transition-colors"
+                className="flex-1 px-3 py-2 text-sm rounded-lg text-center glossy-button"
                 style={{
                   borderColor: currentTheme.primary,
                   color: currentTheme.primary,
                 }}
-                onClick={(e) => e.stopPropagation()}
+                onClick={e => e.stopPropagation()}
               >
                 GitHub
               </a>

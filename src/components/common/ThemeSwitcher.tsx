@@ -1,21 +1,20 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useTheme } from "@/hooks";
+import React from 'react';
+import { useTheme } from '@/hooks';
 
 const ThemeSwitcher: React.FC = () => {
-  const { currentTheme, themes, isDarkMode, changeTheme, toggleDarkMode } =
-    useTheme();
+  const { currentTheme, themes, isDarkMode, changeTheme, toggleDarkMode } = useTheme();
 
   return (
     <div className="flex items-center gap-2">
       <select
         value={currentTheme.id}
-        onChange={(e) => changeTheme(e.target.value)}
-        className="bg-transparent border border-white/20 rounded px-2 py-1 text-sm"
+        onChange={e => changeTheme(e.target.value)}
+        className="glossy-button px-3 py-2 rounded-lg text-sm"
         style={{ color: currentTheme.text }}
       >
-        {themes.map((theme) => (
+        {themes.map(theme => (
           <option key={theme.id} value={theme.id}>
             {theme.name}
           </option>
@@ -24,10 +23,10 @@ const ThemeSwitcher: React.FC = () => {
 
       <button
         onClick={toggleDarkMode}
-        className="p-2 rounded-full hover:bg-white/10 transition-colors"
+        className="glossy-button p-2 rounded-full hover:scale-110"
         style={{ color: currentTheme.text }}
       >
-        {isDarkMode ? "🌙" : "☀️"}
+        {isDarkMode ? '🌙' : '☀️'}
       </button>
     </div>
   );
