@@ -1,1 +1,2 @@
-// Barrel file for profile components
+export { default as HeroSection } from "./HeroSection";
+export { default as BadgeSection } from "./BadgeSection";

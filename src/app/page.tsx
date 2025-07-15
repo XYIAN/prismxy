@@ -1,6 +1,12 @@
 import React from "react";
 import { Metadata } from "next";
-// TODO: Import HeroSection, ProfileStats, PrismAnimation, etc.
+import {
+  HeroSection,
+  BadgeSection,
+  PortfolioGallery,
+  PrismBackground,
+  EasterEgg,
+} from "@/components";
 
 export const metadata: Metadata = {
   title: "Prismxy | Futuristic Personal Profile Platform",
@@ -10,13 +16,15 @@ export const metadata: Metadata = {
 
 const HomePage = () => {
   return (
-    <main className="container mx-auto py-12">
-      {/* TODO: Add HeroSection, ProfileStats, PrismAnimation, etc. */}
-      <h1 className="text-5xl font-extrabold mb-6">Welcome to Prismxy</h1>
-      <p className="text-lg text-white/80 mb-8">
-        A visually immersive, customizable profile and portfolio experience.
-      </p>
-    </main>
+    <>
+      <PrismBackground />
+      <EasterEgg />
+      <main className="relative z-10">
+        <HeroSection />
+        <BadgeSection />
+        <PortfolioGallery />
+      </main>
+    </>
   );
 };
 

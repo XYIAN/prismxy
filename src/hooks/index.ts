@@ -1,1 +1,2 @@
-// Barrel file for hooks
+export * from "./useTheme";
+export * from "./usePrismAnimation";
