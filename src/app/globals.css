@@ -1,6 +1,6 @@
-@use 'primereact/resources/themes/lara-dark-teal/theme.css';
-@use 'primereact/resources/primereact.min.css';
-@use 'primeicons/primeicons.css';
+@import 'primereact/resources/themes/lara-dark-teal/theme.css';
+@import 'primereact/resources/primereact.min.css';
+@import 'primeicons/primeicons.css';
 
 @tailwind base;
 @tailwind components;
@@ -22,6 +22,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  background: #0a0a0a;
+  color: #ffffff;
 }
 
 /* Mobile-optimized touch targets */

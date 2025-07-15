@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.2] - 2024-12-19
+
+### Fixed
+
+- **CSS loading issues**: Fixed PrimeReact CSS imports using `@import` instead of `@use`
+- **PrimeReact provider**: Added PrimeReactProvider to layout for proper component rendering
+- **Background styling**: Added proper background colors and styling to body and layout
+- **Component rendering**: Ensured all components render properly with correct styling
+
 ## [0.5.1] - 2024-12-19
 
 ### Fixed
