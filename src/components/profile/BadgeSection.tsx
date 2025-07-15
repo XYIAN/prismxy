@@ -3,6 +3,7 @@
 import React from 'react';
 import { PROFILE_DATA } from '@/constants';
 import { useTheme } from '@/hooks';
+import { Card } from 'primereact/card';
 
 const BadgeSection: React.FC = () => {
   const { currentTheme } = useTheme();
@@ -16,11 +17,12 @@ const BadgeSection: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {PROFILE_DATA.badges.map(badge => (
-            <div
+            <Card
               key={badge.id}
-              className="glass-card-hover p-4 sm:p-6 rounded-xl sm:rounded-2xl"
+              className="glass-card-hover p-4 sm:p-6 rounded-xl sm:rounded-2xl border-0"
               style={{
-                backgroundColor: currentTheme.surface,
+                backgroundColor: `${currentTheme.surface}CC`,
+                backdropFilter: 'blur(20px)',
               }}
             >
               <div className="text-center">
@@ -48,7 +50,7 @@ const BadgeSection: React.FC = () => {
                   {badge.description}
                 </p>
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       </div>

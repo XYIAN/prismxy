@@ -3,6 +3,8 @@
 import React from 'react';
 import { PROFILE_DATA } from '@/constants';
 import { useTheme } from '@/hooks';
+import { Card } from 'primereact/card';
+import { Button } from 'primereact/button';
 import Image from 'next/image';
 
 const HeroSection: React.FC = () => {
@@ -54,11 +56,12 @@ const HeroSection: React.FC = () => {
         {/* Stats - Mobile Grid */}
         <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
           {Object.entries(PROFILE_DATA.stats).map(([key, value]) => (
-            <div
+            <Card
               key={key}
-              className="glass-card-hover text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl"
+              className="glass-card-hover text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl border-0"
               style={{
-                backgroundColor: currentTheme.surface,
+                backgroundColor: `${currentTheme.surface}CC`,
+                backdropFilter: 'blur(20px)',
               }}
             >
               <div
@@ -73,36 +76,43 @@ const HeroSection: React.FC = () => {
               >
                 {key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
               </div>
-            </div>
+            </Card>
           ))}
         </div>
 
         {/* Social Links - Mobile Optimized */}
         <div className="flex justify-center gap-4 sm:gap-6 mb-8 sm:mb-12">
           {PROFILE_DATA.socialLinks.map(link => (
-            <a
+            <Button
               key={link.platform}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glossy-button p-3 sm:p-4 rounded-full hover:scale-110 touch-manipulation"
+              icon={link.icon}
+              className="glossy-button p-3 sm:p-4 rounded-full hover:scale-110 touch-manipulation border-0"
               style={{
+                backgroundColor: `${currentTheme.primary}20`,
                 color: currentTheme.primary,
+                backdropFilter: 'blur(10px)',
               }}
-            >
-              <i className={`${link.icon} text-xl sm:text-2xl`} />
-            </a>
+              onClick={() => window.open(link.url, '_blank')}
+            />
           ))}
         </div>
 
         {/* Favorite Quote */}
         <div className="text-center px-4">
-          <blockquote
-            className="text-lg sm:text-xl italic max-w-2xl mx-auto glass-card p-4 sm:p-6 rounded-xl sm:rounded-2xl"
-            style={{ color: currentTheme.textSecondary }}
+          <Card
+            className="glass-card p-4 sm:p-6 rounded-xl sm:rounded-2xl border-0 max-w-2xl mx-auto"
+            style={{
+              backgroundColor: `${currentTheme.surface}CC`,
+              backdropFilter: 'blur(20px)',
+            }}
           >
-            &ldquo;{PROFILE_DATA.favoriteQuotes[0]}&rdquo;
-          </blockquote>
+            <blockquote
+              className="text-lg sm:text-xl italic"
+              style={{ color: currentTheme.textSecondary }}
+            >
+              &ldquo;{PROFILE_DATA.favoriteQuotes[0]}&rdquo;
+            </blockquote>
+          </Card>
         </div>
       </div>
     </section>

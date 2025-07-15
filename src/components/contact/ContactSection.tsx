@@ -2,6 +2,10 @@
 
 import React, { useState } from 'react';
 import { useTheme } from '@/hooks';
+import { Card } from 'primereact/card';
+import { InputText } from 'primereact/inputtext';
+import { InputTextarea } from 'primereact/inputtextarea';
+import { Button } from 'primereact/button';
 
 const ContactSection: React.FC = () => {
   const { currentTheme } = useTheme();
@@ -115,7 +119,13 @@ const ContactSection: React.FC = () => {
           </div>
 
           {/* Contact Form */}
-          <div>
+          <Card
+            className="p-4 sm:p-6 border-0"
+            style={{
+              backgroundColor: `${currentTheme.surface}CC`,
+              backdropFilter: 'blur(20px)',
+            }}
+          >
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               <div>
                 <label
@@ -125,16 +135,15 @@ const ContactSection: React.FC = () => {
                 >
                   Name
                 </label>
-                <input
-                  type="text"
+                <InputText
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg glossy-input touch-manipulation"
+                  className="w-full glossy-input touch-manipulation"
                   style={{
-                    backgroundColor: currentTheme.surface,
+                    backgroundColor: `${currentTheme.surface}80`,
                     color: currentTheme.text,
                     borderColor: `${currentTheme.primary}30`,
                   }}
@@ -150,16 +159,16 @@ const ContactSection: React.FC = () => {
                 >
                   Email
                 </label>
-                <input
+                <InputText
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg glossy-input touch-manipulation"
+                  className="w-full glossy-input touch-manipulation"
                   style={{
-                    backgroundColor: currentTheme.surface,
+                    backgroundColor: `${currentTheme.surface}80`,
                     color: currentTheme.text,
                     borderColor: `${currentTheme.primary}30`,
                   }}
@@ -175,16 +184,16 @@ const ContactSection: React.FC = () => {
                 >
                   Message
                 </label>
-                <textarea
+                <InputTextarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 rounded-lg glossy-input touch-manipulation resize-none"
+                  className="w-full glossy-input touch-manipulation resize-none"
                   style={{
-                    backgroundColor: currentTheme.surface,
+                    backgroundColor: `${currentTheme.surface}80`,
                     color: currentTheme.text,
                     borderColor: `${currentTheme.primary}30`,
                   }}
@@ -192,18 +201,17 @@ const ContactSection: React.FC = () => {
                 />
               </div>
 
-              <button
+              <Button
                 type="submit"
-                className="w-full px-6 py-3 rounded-lg glossy-button touch-manipulation font-semibold"
+                label="Send Message"
+                className="w-full glossy-button touch-manipulation"
                 style={{
                   backgroundColor: currentTheme.primary,
                   color: currentTheme.background,
                 }}
-              >
-                Send Message
-              </button>
+              />
             </form>
-          </div>
+          </Card>
         </div>
       </div>
     </section>

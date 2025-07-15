@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.3] - 2024-12-19
+
+### Fixed
+
+- **Complete styling overhaul**: Extracted component styles to `src/styles/components.scss`
+- **PrimeReact integration**: Replaced custom components with PrimeReact Card, Button, InputText, InputTextarea
+- **Background z-index issues**: Fixed background covering content with proper z-index and opacity
+- **Responsive design**: Enhanced mobile responsiveness using PrimeReact's built-in responsive components
+- **Theme-driven styling**: Ensured all components use theme colors consistently
+- **CSS organization**: Cleaned up global CSS to only include essential styles
+
+### Changed
+
+- **HeroSection**: Now uses PrimeReact Card and Button components
+- **BadgeSection**: Updated to use PrimeReact Card components
+- **ContactSection**: Replaced with PrimeReact Card, InputText, InputTextarea, and Button
+- **Background styling**: Reduced particle count and opacity for better performance
+- **Component styling**: All components now use theme-driven glassmorphism effects
+
+### Technical
+
+- **SCSS structure**: Created proper SCSS file for component-specific styles
+- **PrimeReact components**: Leveraged built-in responsive design and accessibility
+- **Performance**: Optimized background animations and reduced CSS conflicts
+- **Maintainability**: Better separation of concerns with styles in dedicated folder
+
 ## [0.5.2] - 2024-12-19
 
 ### Fixed
