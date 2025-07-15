@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1] - PrimeReact Theme Update
+
+### 🎨 Theme Enhancement
+
+- **PrimeReact Theme**: Updated from `lara-dark-cyan` to `lara-dark-teal` for better visual consistency
+- **Color Harmony**: Improved alignment between PrimeReact components and Prismxy's teal theme
+- **Visual Cohesion**: Better integration of UI components with the overall design aesthetic
+
 ## [0.3.0] - Image Integration & Visual Enhancements
 
 ### 🖼 Image Integration
