@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.1] - 2024-12-19
+
+### Fixed
+
+- **Netlify build compatibility**: Converted `next.config.ts` to `next.config.js` to fix Netlify deployment
+- **Build configuration**: Ensured Next.js config is compatible with Netlify's build environment
+
 ## [0.5.0] - 2024-12-19
 
 ### Added
