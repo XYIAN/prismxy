@@ -1,14 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Card } from 'primereact/card';
+import { Profile } from '@/types';
+import { FONT_OPTIONS, DEFAULT_FONT } from '@/constants/fonts';
+import { THEMES, DEFAULT_THEME } from '@/constants/themes';
 import { Dropdown } from 'primereact/dropdown';
 import { ColorPicker } from 'primereact/colorpicker';
 import { Button } from 'primereact/button';
-import { Profile, FontOption, Theme } from '@/types';
-import { FONT_OPTIONS, DEFAULT_FONT } from '@/constants/fonts';
-import { THEMES, DEFAULT_THEME } from '@/constants/themes';
 import BaseCard from '@/components/common/BaseCard';
 import WizardHeader from '@/components/wizard/WizardHeader';
 import WizardProgress from '@/components/wizard/WizardProgress';

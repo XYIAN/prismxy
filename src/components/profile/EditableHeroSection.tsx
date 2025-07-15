@@ -8,10 +8,15 @@ import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import Image from 'next/image';
+import { Toast } from 'primereact/toast';
+import { ProgressSpinner } from 'primereact/progressspinner';
+import { useRef, useState } from 'react';
 
 const EditableHeroSection: React.FC = () => {
   const { currentTheme } = useTheme();
   const { profileData, isEditMode, updateProfile } = useProfile();
+  const toast = useRef<Toast>(null);
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleInputChange = (field: string, value: string) => {
     const updatedSections = [...profileData.sections];
@@ -91,8 +96,31 @@ const EditableHeroSection: React.FC = () => {
     updateProfile({ sections: updatedSections });
   };
 
+  // Add save handler
+  const handleSave = async () => {
+    setIsSaving(true);
+    await updateProfile({}, () => {
+      setIsSaving(false);
+      toast.current?.show({
+        severity: 'success',
+        summary: 'Profile Updated',
+        detail: 'Your changes have been saved!',
+        life: 2500,
+      });
+    });
+  };
+
   return (
     <section className="py-8 px-4 sm:py-12 md:py-20">
+      <Toast ref={toast} position="top-center" />
+      {isSaving && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="flex flex-col items-center gap-4">
+            <ProgressSpinner style={{ width: 60, height: 60 }} strokeWidth="4" />
+            <span className="text-white text-lg font-medium">Saving your changes...</span>
+          </div>
+        </div>
+      )}
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8 sm:mb-12">
           {/* Avatar */}
@@ -316,6 +344,18 @@ const EditableHeroSection: React.FC = () => {
             )}
           </Card>
         </div>
+        {isEditMode && (
+          <div className="flex justify-end mt-8">
+            <Button
+              label="Save Changes"
+              icon="pi pi-save"
+              className="p-button-success"
+              style={{ backgroundColor: currentTheme.primary, color: currentTheme.background }}
+              onClick={handleSave}
+              disabled={isSaving}
+            />
+          </div>
+        )}
       </div>
     </section>
   );

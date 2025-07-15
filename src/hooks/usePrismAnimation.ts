@@ -1,12 +1,9 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
-import { PrismParticle, AnimationConfig } from "@/types";
+import { useEffect, useRef } from 'react';
+import { PrismParticle, AnimationConfig } from '@/types';
 
-export const usePrismAnimation = (
-  particles: PrismParticle[],
-  config: AnimationConfig
-) => {
+export const usePrismAnimation = (particles: PrismParticle[], config: AnimationConfig) => {
   const animationRef = useRef<number | null>(null);
 
   useEffect(() => {

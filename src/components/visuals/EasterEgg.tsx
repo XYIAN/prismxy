@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { useTheme } from "@/hooks";
+import React, { useState, useEffect } from 'react';
+import { useTheme } from '@/hooks';
 
 interface Sparkle {
   id: number;
@@ -35,14 +35,12 @@ const EasterEgg: React.FC = () => {
 
     if (timeDiff < 100) {
       // Rapid clicking detected
-      setClickCount((prev) => prev + 1);
+      setClickCount(prev => prev + 1);
 
       if (clickCount >= 5) {
         // Create sparkle burst
-        const newSparkles = Array.from({ length: 10 }, () =>
-          createSparkle(e.clientX, e.clientY)
-        );
-        setSparkles((prev) => [...prev, ...newSparkles]);
+        const newSparkles = Array.from({ length: 10 }, () => createSparkle(e.clientX, e.clientY));
+        setSparkles(prev => [...prev, ...newSparkles]);
         setClickCount(0);
       }
     } else {
@@ -53,25 +51,20 @@ const EasterEgg: React.FC = () => {
 
     // Create single sparkle
     const sparkle = createSparkle(e.clientX, e.clientY);
-    setSparkles((prev) => [...prev, sparkle]);
+    setSparkles(prev => [...prev, sparkle]);
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSparkles((prev) =>
-        prev.filter((sparkle) => Date.now() - sparkle.id < 2000)
-      );
+      setSparkles(prev => prev.filter(sparkle => Date.now() - sparkle.id < 2000));
     }, 100);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div
-      className="fixed inset-0 pointer-events-none z-50"
-      onClick={handleClick}
-    >
-      {sparkles.map((sparkle) => (
+    <div className="fixed inset-0 pointer-events-none z-50" onClick={handleClick}>
+      {sparkles.map(sparkle => (
         <div
           key={sparkle.id}
           className="absolute animate-ping"
@@ -81,7 +74,7 @@ const EasterEgg: React.FC = () => {
             width: sparkle.size,
             height: sparkle.size,
             backgroundColor: sparkle.color,
-            borderRadius: "50%",
+            borderRadius: '50%',
             animationDelay: `${sparkle.delay}ms`,
           }}
         />
