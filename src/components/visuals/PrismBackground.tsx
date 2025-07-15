@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { useTheme } from "@/hooks";
+import Image from "next/image";
 
 const PrismBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -78,11 +79,34 @@ const PrismBackground: React.FC = () => {
   }, [currentTheme]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
-      style={{ background: currentTheme.background }}
-    />
+    <div className="fixed inset-0 z-0">
+      {/* Parallax Background */}
+      <div className="absolute inset-0">
+        <Image
+          src="/bg1.png"
+          alt="Prismxy Background"
+          fill
+          className="object-cover"
+          priority
+          style={{
+            filter: "brightness(0.3) contrast(1.2)",
+          }}
+        />
+        {/* Overlay for better text readability */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(135deg, ${currentTheme.background}80, ${currentTheme.background}40)`,
+          }}
+        />
+      </div>
+
+      {/* Floating Particles Canvas */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 pointer-events-none"
+      />
+    </div>
   );
 };
 

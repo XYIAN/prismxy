@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.3.0] - Image Integration & Visual Enhancements
+
+### 🖼 Image Integration
+
+- **Parallax Background**: Integrated `bg1.png` as global parallax background with theme overlay
+- **Profile Avatar**: Updated HeroSection to use `icon1.png` as profile avatar
+- **Project Cards**: Enhanced ProjectCard components with `bg2.png` background images
+- **Lightbox Enhancement**: Portfolio lightbox now uses `icon-lg.png` for project previews
+- **Navbar Logo**: Added `icon1.png` as the Prismxy logo in the navigation bar
+
+### 🎨 Visual Improvements
+
+- **Background Layering**: Proper z-index layering with parallax background and floating particles
+- **Image Optimization**: All images use Next.js Image component for optimal loading
+- **Theme Integration**: Background images adapt to current theme with overlay effects
+- **Responsive Images**: All images are responsive and properly sized for different screen sizes
+- **Enhanced Glassmorphism**: Improved backdrop blur effects with image backgrounds
+
+### 🔧 Technical Updates
+
+- **Next.js Image Component**: Proper image optimization and loading
+- **CSS Cleanup**: Removed hardcoded background colors in favor of image backgrounds
+- **Performance**: Optimized image loading with priority and proper sizing
+- **Accessibility**: Added proper alt text for all images
+
 ## [0.2.0] - Complete Prismxy Implementation
 
 ### ✨ Features Added

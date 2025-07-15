@@ -3,6 +3,7 @@
 import React from "react";
 import { PROFILE_DATA } from "@/constants";
 import { useTheme } from "@/hooks";
+import Image from "next/image";
 
 const HeroSection: React.FC = () => {
   const { currentTheme } = useTheme();
@@ -13,14 +14,15 @@ const HeroSection: React.FC = () => {
         <div className="text-center mb-12">
           <div className="relative inline-block mb-8">
             <div
-              className="w-32 h-32 rounded-full mx-auto mb-6 overflow-hidden border-4"
+              className="w-32 h-32 rounded-full mx-auto mb-6 overflow-hidden border-4 relative"
               style={{ borderColor: currentTheme.primary }}
             >
-              <div
-                className="w-full h-full bg-gradient-to-br"
-                style={{
-                  background: `linear-gradient(135deg, ${currentTheme.primary}, ${currentTheme.secondary})`,
-                }}
+              <Image
+                src="/icon1.png"
+                alt="Profile Avatar"
+                fill
+                className="object-cover"
+                priority
               />
             </div>
             <div

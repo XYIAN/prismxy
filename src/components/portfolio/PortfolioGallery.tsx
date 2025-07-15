@@ -5,6 +5,7 @@ import { PORTFOLIO_DATA } from "@/constants";
 import { PortfolioItem } from "@/types";
 import { useTheme } from "@/hooks";
 import ProjectCard from "./ProjectCard";
+import Image from "next/image";
 
 const PortfolioGallery: React.FC = () => {
   const { currentTheme } = useTheme();
@@ -76,20 +77,32 @@ const PortfolioGallery: React.FC = () => {
                   </button>
                 </div>
 
-                <div
-                  className="w-full h-64 rounded-lg mb-6 bg-gradient-to-br flex items-center justify-center"
-                  style={{
-                    background: `linear-gradient(135deg, ${currentTheme.primary}20, ${currentTheme.secondary}20)`,
-                  }}
-                >
+                <div className="w-full h-64 rounded-lg mb-6 relative overflow-hidden">
+                  <Image
+                    src="/icon-lg.png"
+                    alt="Project Preview"
+                    fill
+                    className="object-cover"
+                  />
                   <div
-                    className="w-20 h-20 rounded-full flex items-center justify-center text-4xl"
-                    style={{ backgroundColor: currentTheme.primary }}
-                  >
-                    <i
-                      className="pi pi-code"
-                      style={{ color: currentTheme.background }}
-                    />
+                    className="absolute inset-0"
+                    style={{
+                      background: `linear-gradient(135deg, ${currentTheme.primary}20, ${currentTheme.secondary}20)`,
+                    }}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div
+                      className="w-20 h-20 rounded-full flex items-center justify-center text-4xl backdrop-blur-lg border"
+                      style={{
+                        backgroundColor: `${currentTheme.primary}20`,
+                        borderColor: currentTheme.primary,
+                      }}
+                    >
+                      <i
+                        className="pi pi-code"
+                        style={{ color: currentTheme.primary }}
+                      />
+                    </div>
                   </div>
                 </div>
 

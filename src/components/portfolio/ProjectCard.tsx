@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { PortfolioItem } from "@/types";
 import { useTheme } from "@/hooks";
+import Image from "next/image";
 
 interface ProjectCardProps {
   project: PortfolioItem;
@@ -21,22 +22,34 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
       onClick={onClick}
     >
       {/* Background Image */}
-      <div
-        className="w-full h-64 bg-gradient-to-br transition-transform duration-500"
-        style={{
-          background: `linear-gradient(135deg, ${currentTheme.primary}20, ${currentTheme.secondary}20)`,
-          transform: isHovered ? "scale(1.05)" : "scale(1)",
-        }}
-      >
-        <div className="w-full h-full flex items-center justify-center">
+      <div className="w-full h-64 relative">
+        <Image
+          src="/bg2.png"
+          alt="Project Background"
+          fill
+          className="object-cover transition-transform duration-500"
+          style={{
+            transform: isHovered ? "scale(1.05)" : "scale(1)",
+          }}
+        />
+        {/* Gradient Overlay */}
+        <div
+          className="absolute inset-0 transition-opacity duration-300"
+          style={{
+            background: `linear-gradient(135deg, ${currentTheme.primary}40, ${currentTheme.secondary}40)`,
+            opacity: isHovered ? 0.8 : 0.6,
+          }}
+        />
+        {/* Project Icon */}
+        <div className="absolute inset-0 flex items-center justify-center">
           <div
-            className="w-16 h-16 rounded-full flex items-center justify-center text-3xl"
-            style={{ backgroundColor: currentTheme.primary }}
+            className="w-16 h-16 rounded-full flex items-center justify-center text-3xl backdrop-blur-lg border"
+            style={{
+              backgroundColor: `${currentTheme.primary}20`,
+              borderColor: currentTheme.primary,
+            }}
           >
-            <i
-              className="pi pi-code"
-              style={{ color: currentTheme.background }}
-            />
+            <i className="pi pi-code" style={{ color: currentTheme.primary }} />
           </div>
         </div>
       </div>
