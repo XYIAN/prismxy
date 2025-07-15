@@ -1,20 +1,22 @@
-/* PrimeReact imports */
+// PrimeReact imports
 @import 'primereact/resources/themes/lara-dark-teal/theme.css';
 @import 'primereact/resources/primereact.min.css';
 @import 'primeicons/primeicons.css';
 
-/* Tailwind CSS */
+// Tailwind CSS
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Import component styles */
+// Import component styles
 @import '../styles/components.scss';
 
-/* Essential global styles only */
+// Essential global styles only
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+  transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out,
+    border-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
 }
 
 html {
@@ -27,13 +29,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  background: #0a0a0a;
-  color: #ffffff;
+  background: #10151a; // Clean, dark, neutral background
+  color: #fff;
   margin: 0;
   padding: 0;
+  transition: background-color 0.5s ease-in-out;
 }
 
-/* Mobile-optimized touch targets */
+// Mobile-optimized touch targets
 button,
 a,
 [role='button'] {
@@ -41,7 +44,7 @@ a,
   min-width: 44px;
 }
 
-/* Custom scrollbar */
+// Custom scrollbar
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -59,27 +62,38 @@ a,
   background: rgba(255, 255, 255, 0.5);
 }
 
-/* Focus styles */
+// Focus styles
 *:focus {
   outline: 2px solid rgba(0, 212, 255, 0.5);
   outline-offset: 2px;
 }
 
-/* Selection styles */
+// Selection styles
 ::selection {
   background: rgba(0, 212, 255, 0.3);
   color: white;
 }
 
-/* Safe area padding */
+// Safe area padding
 .safe-area-padding {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* Mobile viewport height fix */
+// Mobile viewport height fix
 .mobile-vh {
   height: 100vh;
   height: 100dvh;
+}
+
+// Theme transition utilities
+.theme-transition {
+  transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out,
+    border-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+
+// Disable transitions during theme loading
+.theme-loading * {
+  transition: none !important;
 }

@@ -2,32 +2,39 @@
 
 import React from 'react';
 import { useTheme } from '@/hooks';
+import { Dropdown } from 'primereact/dropdown';
 
 const ThemeSwitcher: React.FC = () => {
-  const { currentTheme, themes, isDarkMode, changeTheme, toggleDarkMode } = useTheme();
+  const { currentTheme, themes, isLoading, changeTheme } = useTheme();
+
+  const handleThemeChange = (themeId: string) => {
+    changeTheme(themeId);
+  };
 
   return (
     <div className="flex items-center gap-2">
-      <select
+      <Dropdown
         value={currentTheme.id}
-        onChange={e => changeTheme(e.target.value)}
-        className="glossy-button px-3 py-2 rounded-lg text-sm"
-        style={{ color: currentTheme.text }}
-      >
-        {themes.map(theme => (
-          <option key={theme.id} value={theme.id}>
-            {theme.name}
-          </option>
-        ))}
-      </select>
+        options={themes}
+        optionLabel="name"
+        optionValue="id"
+        onChange={e => handleThemeChange(e.value)}
+        className="min-w-[140px]"
+        disabled={isLoading}
+        placeholder="Select Theme"
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          color: currentTheme.text,
+        }}
+      />
 
-      <button
-        onClick={toggleDarkMode}
-        className="glossy-button p-2 rounded-full hover:scale-110"
-        style={{ color: currentTheme.text }}
-      >
-        {isDarkMode ? '🌙' : '☀️'}
-      </button>
+      {isLoading && (
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+          <span className="text-sm">Switching...</span>
+        </div>
+      )}
     </div>
   );
 };

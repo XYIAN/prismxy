@@ -11,28 +11,28 @@ const HeroSection: React.FC = () => {
   const { currentTheme } = useTheme();
 
   return (
-    <section className="relative z-10 py-8 px-4 sm:py-12 md:py-20">
+    <section className="py-8 px-4 sm:py-12 md:py-20">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8 sm:mb-12">
           {/* Avatar */}
           <div className="relative inline-block mb-6 sm:mb-8">
             <div
-              className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full mx-auto mb-4 sm:mb-6 overflow-hidden border-4 relative animate-glow"
-              style={{
-                borderColor: currentTheme.primary,
-                boxShadow: `0 0 30px ${currentTheme.primary}40`,
-              }}
+              className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full mx-auto mb-4 sm:mb-6 overflow-hidden border-4"
+              style={{ borderColor: currentTheme.primary }}
             >
               <Image src="/icon1.png" alt="Profile Avatar" fill className="object-cover" priority />
             </div>
             <div
-              className="absolute -top-1 -right-1 w-6 h-6 sm:w-8 sm:h-8 rounded-full animate-pulse"
+              className="absolute -top-1 -right-1 w-6 h-6 sm:w-8 sm:h-8 rounded-full"
               style={{ backgroundColor: currentTheme.accent }}
             />
           </div>
 
           {/* Name */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 text-gradient leading-tight">
+          <h1
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 leading-tight"
+            style={{ color: currentTheme.primary }}
+          >
             {PROFILE_DATA.name}
           </h1>
 
@@ -58,11 +58,8 @@ const HeroSection: React.FC = () => {
           {Object.entries(PROFILE_DATA.stats).map(([key, value]) => (
             <Card
               key={key}
-              className="glass-card-hover text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl border-0"
-              style={{
-                backgroundColor: `${currentTheme.surface}CC`,
-                backdropFilter: 'blur(20px)',
-              }}
+              className="text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl border-0 shadow"
+              style={{ backgroundColor: `${currentTheme.surface}CC` }}
             >
               <div
                 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2"
@@ -86,12 +83,8 @@ const HeroSection: React.FC = () => {
             <Button
               key={link.platform}
               icon={link.icon}
-              className="glossy-button p-3 sm:p-4 rounded-full hover:scale-110 touch-manipulation border-0"
-              style={{
-                backgroundColor: `${currentTheme.primary}20`,
-                color: currentTheme.primary,
-                backdropFilter: 'blur(10px)',
-              }}
+              className="p-3 sm:p-4 rounded-full border-0 shadow"
+              style={{ backgroundColor: `${currentTheme.primary}20`, color: currentTheme.primary }}
               onClick={() => window.open(link.url, '_blank')}
             />
           ))}
@@ -100,11 +93,8 @@ const HeroSection: React.FC = () => {
         {/* Favorite Quote */}
         <div className="text-center px-4">
           <Card
-            className="glass-card p-4 sm:p-6 rounded-xl sm:rounded-2xl border-0 max-w-2xl mx-auto"
-            style={{
-              backgroundColor: `${currentTheme.surface}CC`,
-              backdropFilter: 'blur(20px)',
-            }}
+            className="p-4 sm:p-6 rounded-xl sm:rounded-2xl border-0 max-w-2xl mx-auto shadow"
+            style={{ backgroundColor: `${currentTheme.surface}CC` }}
           >
             <blockquote
               className="text-lg sm:text-xl italic"

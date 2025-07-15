@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
+import './globals.scss';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { PrimeReactProvider } from 'primereact/api';
@@ -46,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${inter.className} antialiased`}>
         <PrimeReactProvider>
-          <div className="min-h-screen flex flex-col bg-[#0a0a0a]">
+          <div className="min-h-screen flex flex-col">
             <Navbar />
             <main className="flex-1 pt-16 sm:pt-20">{children}</main>
             <Footer />
