@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.0] - 2024-06-19
+
+### Major Refactor
+
+- Refactored all page files to use modular, reusable components for all major sections (landing, dashboard, wizard, user profile, etc.).
+- Extracted Hero, Skills, Header, Footer, and other sections into their own components.
+- Updated all profile data to use a normalized structure with sections and settings, matching the Profile type.
+- Updated all hooks and components to use the new structure and type-safe access patterns.
+- Fixed all linter and type errors, ensuring robust TypeScript usage throughout.
+- Improved maintainability, scalability, and code clarity.
+- Build and lint pass with no errors.
+
 ## [0.6.1] - 2024-12-19
 
 ### Added

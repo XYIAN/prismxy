@@ -4,10 +4,18 @@ import React from 'react';
 import { useTheme } from '@/hooks';
 import { useProfile } from '@/hooks/useProfile';
 import { Card } from 'primereact/card';
+import { Badge } from '@/types';
 
 const BadgeSection: React.FC = () => {
   const { currentTheme } = useTheme();
   const { profileData } = useProfile();
+
+  // Find the section that contains badges (type 'skills')
+  const badgesSection = profileData.sections.find(section => section.type === 'skills');
+  const badges =
+    badgesSection && Array.isArray(badgesSection.content.badges)
+      ? (badgesSection.content.badges as Badge[])
+      : [];
 
   return (
     <section className="py-8 px-4 sm:py-12 md:py-16">
@@ -20,7 +28,7 @@ const BadgeSection: React.FC = () => {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-          {profileData.badges.map(badge => (
+          {badges.map((badge: Badge) => (
             <Card
               key={badge.id}
               className="p-4 sm:p-6 rounded-xl sm:rounded-2xl border-0 shadow"

@@ -14,13 +14,53 @@ const EditableHeroSection: React.FC = () => {
   const { profileData, isEditMode, updateProfile } = useProfile();
 
   const handleInputChange = (field: string, value: string) => {
-    updateProfile({ [field]: value });
+    const updatedSections = [...profileData.sections];
+    updatedSections[heroSectionIndex] = {
+      ...heroSection,
+      content: { ...heroContent, [field]: value },
+    };
+    updateProfile({ sections: updatedSections });
   };
 
+  // Find the hero section
+  const heroSectionIndex = profileData.sections.findIndex(section => section.type === 'hero');
+  const heroSection = profileData.sections[heroSectionIndex];
+  const heroContent = heroSection?.content || {};
+
+  function isHeroContent(content: unknown): content is {
+    name: string;
+    title: string;
+    bio: string;
+    avatar: string;
+    stats: Record<string, number>;
+    socialLinks: Array<{ platform: string; url: string; icon: string }>;
+    favoriteQuotes: string[];
+  } {
+    if (!content || typeof content !== 'object') return false;
+    const c = content as Record<string, unknown>;
+    return (
+      typeof c.name === 'string' &&
+      typeof c.title === 'string' &&
+      typeof c.bio === 'string' &&
+      typeof c.avatar === 'string' &&
+      typeof c.stats === 'object' &&
+      Array.isArray(c.socialLinks) &&
+      Array.isArray(c.favoriteQuotes)
+    );
+  }
+
+  if (!isHeroContent(heroContent)) return null;
+
   const handleSocialLinkChange = (index: number, field: string, value: string) => {
-    const updatedLinks = [...profileData.socialLinks];
+    if (!Array.isArray(heroContent.socialLinks)) return;
+    const updatedLinks = [...heroContent.socialLinks];
     updatedLinks[index] = { ...updatedLinks[index], [field]: value };
-    updateProfile({ socialLinks: updatedLinks });
+    const updatedSections = [...profileData.sections];
+    updatedSections[heroSectionIndex] = {
+      ...heroSection,
+      content: { ...heroContent, socialLinks: updatedLinks },
+    };
+    updateProfile({ sections: updatedSections });
   };
 
   const addSocialLink = () => {
@@ -29,12 +69,26 @@ const EditableHeroSection: React.FC = () => {
       url: 'https://example.com',
       icon: 'pi pi-link',
     };
-    updateProfile({ socialLinks: [...profileData.socialLinks, newLink] });
+    const updatedLinks = Array.isArray(heroContent.socialLinks)
+      ? [...heroContent.socialLinks, newLink]
+      : [newLink];
+    const updatedSections = [...profileData.sections];
+    updatedSections[heroSectionIndex] = {
+      ...heroSection,
+      content: { ...heroContent, socialLinks: updatedLinks },
+    };
+    updateProfile({ sections: updatedSections });
   };
 
   const removeSocialLink = (index: number) => {
-    const updatedLinks = profileData.socialLinks.filter((_, i) => i !== index);
-    updateProfile({ socialLinks: updatedLinks });
+    if (!Array.isArray(heroContent.socialLinks)) return;
+    const updatedLinks = heroContent.socialLinks.filter((_: unknown, i: number) => i !== index);
+    const updatedSections = [...profileData.sections];
+    updatedSections[heroSectionIndex] = {
+      ...heroSection,
+      content: { ...heroContent, socialLinks: updatedLinks },
+    };
+    updateProfile({ sections: updatedSections });
   };
 
   return (
@@ -58,7 +112,7 @@ const EditableHeroSection: React.FC = () => {
           {/* Name */}
           {isEditMode ? (
             <InputText
-              value={profileData.name}
+              value={heroContent.name || ''}
               onChange={e => handleInputChange('name', e.target.value)}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 text-center"
               style={{
@@ -72,14 +126,14 @@ const EditableHeroSection: React.FC = () => {
               className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 leading-tight"
               style={{ color: currentTheme.primary }}
             >
-              {profileData.name}
+              {heroContent.name}
             </h1>
           )}
 
           {/* Title */}
           {isEditMode ? (
             <InputText
-              value={profileData.title}
+              value={heroContent.title || ''}
               onChange={e => handleInputChange('title', e.target.value)}
               className="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 opacity-90 px-4 text-center"
               style={{
@@ -93,14 +147,14 @@ const EditableHeroSection: React.FC = () => {
               className="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 opacity-90 px-4"
               style={{ color: currentTheme.textSecondary }}
             >
-              {profileData.title}
+              {heroContent.title}
             </p>
           )}
 
           {/* Bio */}
           {isEditMode ? (
             <InputTextarea
-              value={profileData.bio}
+              value={heroContent.bio || ''}
               onChange={e => handleInputChange('bio', e.target.value)}
               rows={3}
               className="text-base sm:text-lg max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-4 text-center resize-none"
@@ -115,97 +169,107 @@ const EditableHeroSection: React.FC = () => {
               className="text-base sm:text-lg max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-4"
               style={{ color: currentTheme.textSecondary }}
             >
-              {profileData.bio}
+              {heroContent.bio}
             </p>
           )}
         </div>
 
         {/* Stats - Mobile Grid */}
         <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
-          {Object.entries(profileData.stats).map(([key, value]) => (
-            <Card
-              key={key}
-              className="text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl border-0 shadow"
-              style={{ backgroundColor: `${currentTheme.surface}CC` }}
-            >
-              {isEditMode ? (
-                <InputText
-                  value={value.toString()}
-                  onChange={e => {
-                    const numValue = parseInt(e.target.value) || 0;
-                    updateProfile({ stats: { ...profileData.stats, [key]: numValue } });
-                  }}
-                  className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2 text-center"
-                  style={{
-                    color: currentTheme.primary,
-                    backgroundColor: 'transparent',
-                    border: 'none',
-                  }}
-                />
-              ) : (
-                <div
-                  className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2"
-                  style={{ color: currentTheme.primary }}
-                >
-                  {value.toLocaleString()}
-                </div>
-              )}
-              <div
-                className="text-xs sm:text-sm uppercase tracking-wider"
-                style={{ color: currentTheme.textSecondary }}
+          {heroContent.stats &&
+            Object.entries(heroContent.stats).map(([key, value]) => (
+              <Card
+                key={key}
+                className="text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl border-0 shadow"
+                style={{ backgroundColor: `${currentTheme.surface}CC` }}
               >
-                {key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
-              </div>
-            </Card>
-          ))}
+                {isEditMode ? (
+                  <InputText
+                    value={value.toString()}
+                    onChange={e => {
+                      const numValue = parseInt(e.target.value) || 0;
+                      const updatedStats = { ...heroContent.stats, [key]: numValue };
+                      const updatedSections = [...profileData.sections];
+                      updatedSections[heroSectionIndex] = {
+                        ...heroSection,
+                        content: { ...heroContent, stats: updatedStats },
+                      };
+                      updateProfile({ sections: updatedSections });
+                    }}
+                    className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2 text-center"
+                    style={{
+                      color: currentTheme.primary,
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                    }}
+                  />
+                ) : (
+                  <div
+                    className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2"
+                    style={{ color: currentTheme.primary }}
+                  >
+                    {value.toLocaleString()}
+                  </div>
+                )}
+                <div
+                  className="text-xs sm:text-sm uppercase tracking-wider"
+                  style={{ color: currentTheme.textSecondary }}
+                >
+                  {key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
+                </div>
+              </Card>
+            ))}
         </div>
 
         {/* Social Links - Mobile Optimized */}
         <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 sm:mb-12">
-          {profileData.socialLinks.map((link, index) => (
-            <div key={index} className="flex flex-col items-center gap-2">
-              {isEditMode ? (
-                <div className="flex flex-col gap-2">
-                  <InputText
-                    value={link.platform}
-                    onChange={e => handleSocialLinkChange(index, 'platform', e.target.value)}
-                    className="text-sm text-center"
-                    style={{
-                      backgroundColor: 'transparent',
-                      border: '1px solid rgba(255,255,255,0.2)',
-                    }}
-                    placeholder="Platform"
-                  />
-                  <InputText
-                    value={link.url}
-                    onChange={e => handleSocialLinkChange(index, 'url', e.target.value)}
-                    className="text-sm text-center"
-                    style={{
-                      backgroundColor: 'transparent',
-                      border: '1px solid rgba(255,255,255,0.2)',
-                    }}
-                    placeholder="URL"
-                  />
-                  <Button
-                    icon="pi pi-trash"
-                    className="p-1 rounded-full"
-                    style={{ backgroundColor: 'rgba(255,0,0,0.2)', color: 'red' }}
-                    onClick={() => removeSocialLink(index)}
-                  />
+          {Array.isArray(heroContent.socialLinks) &&
+            heroContent.socialLinks.map(
+              (link: { platform: string; url: string; icon: string }, index: number) => (
+                <div key={index} className="flex flex-col items-center gap-2">
+                  {isEditMode ? (
+                    <div className="flex flex-col gap-2">
+                      <InputText
+                        value={link.platform}
+                        onChange={e => handleSocialLinkChange(index, 'platform', e.target.value)}
+                        className="text-sm text-center"
+                        style={{
+                          backgroundColor: 'transparent',
+                          border: '1px solid rgba(255,255,255,0.2)',
+                        }}
+                        placeholder="Platform"
+                      />
+                      <InputText
+                        value={link.url}
+                        onChange={e => handleSocialLinkChange(index, 'url', e.target.value)}
+                        className="text-sm text-center"
+                        style={{
+                          backgroundColor: 'transparent',
+                          border: '1px solid rgba(255,255,255,0.2)',
+                        }}
+                        placeholder="URL"
+                      />
+                      <Button
+                        icon="pi pi-trash"
+                        className="p-1 rounded-full"
+                        style={{ backgroundColor: 'rgba(255,0,0,0.2)', color: 'red' }}
+                        onClick={() => removeSocialLink(index)}
+                      />
+                    </div>
+                  ) : (
+                    <Button
+                      icon={link.icon}
+                      className="p-3 sm:p-4 rounded-full border-0 shadow"
+                      style={{
+                        backgroundColor: `${currentTheme.primary}20`,
+                        color: currentTheme.primary,
+                      }}
+                      onClick={() => window.open(link.url, '_blank')}
+                    />
+                  )}
                 </div>
-              ) : (
-                <Button
-                  icon={link.icon}
-                  className="p-3 sm:p-4 rounded-full border-0 shadow"
-                  style={{
-                    backgroundColor: `${currentTheme.primary}20`,
-                    color: currentTheme.primary,
-                  }}
-                  onClick={() => window.open(link.url, '_blank')}
-                />
-              )}
-            </div>
-          ))}
+              )
+            )}
           {isEditMode && (
             <Button
               icon="pi pi-plus"
@@ -224,8 +288,16 @@ const EditableHeroSection: React.FC = () => {
           >
             {isEditMode ? (
               <InputTextarea
-                value={profileData.favoriteQuotes[0]}
-                onChange={e => updateProfile({ favoriteQuotes: [e.target.value] })}
+                value={heroContent.favoriteQuotes?.[0] || ''}
+                onChange={e => {
+                  const updatedQuotes = [e.target.value];
+                  const updatedSections = [...profileData.sections];
+                  updatedSections[heroSectionIndex] = {
+                    ...heroSection,
+                    content: { ...heroContent, favoriteQuotes: updatedQuotes },
+                  };
+                  updateProfile({ sections: updatedSections });
+                }}
                 rows={2}
                 className="text-lg sm:text-xl italic text-center resize-none"
                 style={{
@@ -239,7 +311,7 @@ const EditableHeroSection: React.FC = () => {
                 className="text-lg sm:text-xl italic"
                 style={{ color: currentTheme.textSecondary }}
               >
-                &ldquo;{profileData.favoriteQuotes[0]}&rdquo;
+                &ldquo;{heroContent.favoriteQuotes?.[0] || ''}&rdquo;
               </blockquote>
             )}
           </Card>
