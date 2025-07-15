@@ -1,17 +1,15 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { PORTFOLIO_DATA } from "@/constants";
-import { PortfolioItem } from "@/types";
-import { useTheme } from "@/hooks";
-import ProjectCard from "./ProjectCard";
-import Image from "next/image";
+import React, { useState } from 'react';
+import { PORTFOLIO_DATA } from '@/constants';
+import { PortfolioItem } from '@/types';
+import { useTheme } from '@/hooks';
+import ProjectCard from './ProjectCard';
+import Image from 'next/image';
 
 const PortfolioGallery: React.FC = () => {
   const { currentTheme } = useTheme();
-  const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(
-    null
-  );
+  const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(null);
 
   const handleProjectClick = (project: PortfolioItem) => {
     setSelectedProject(project);
@@ -22,17 +20,17 @@ const PortfolioGallery: React.FC = () => {
   };
 
   return (
-    <section className="relative z-10 py-16">
-      <div className="container mx-auto px-4">
+    <section className="relative z-10 py-8 px-4 sm:py-12 md:py-16">
+      <div className="max-w-6xl mx-auto">
         <h2
-          className="text-3xl font-bold text-center mb-12"
+          className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12"
           style={{ color: currentTheme.text }}
         >
           Featured Projects
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {PORTFOLIO_DATA.map((project) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+          {PORTFOLIO_DATA.map(project => (
             <ProjectCard
               key={project.id}
               project={project}
@@ -41,7 +39,7 @@ const PortfolioGallery: React.FC = () => {
           ))}
         </div>
 
-        {/* Lightbox */}
+        {/* Mobile-Optimized Lightbox */}
         {selectedProject && (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
@@ -53,37 +51,31 @@ const PortfolioGallery: React.FC = () => {
             />
 
             <div
-              className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-2xl backdrop-blur-lg border"
+              className="relative w-full max-w-sm sm:max-w-2xl lg:max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl sm:rounded-2xl glass-card"
               style={{
                 backgroundColor: currentTheme.surface,
-                borderColor: `${currentTheme.primary}30`,
               }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
             >
-              <div className="p-8">
-                <div className="flex items-center justify-between mb-6">
+              <div className="p-4 sm:p-6 md:p-8">
+                <div className="flex items-center justify-between mb-4 sm:mb-6">
                   <h3
-                    className="text-3xl font-bold"
+                    className="text-xl sm:text-2xl md:text-3xl font-bold"
                     style={{ color: currentTheme.text }}
                   >
                     {selectedProject.title}
                   </h3>
                   <button
                     onClick={closeLightbox}
-                    className="p-2 rounded-full hover:bg-white/10 transition-colors"
+                    className="p-2 rounded-full hover:bg-white/10 transition-colors touch-manipulation"
                     style={{ color: currentTheme.text }}
                   >
-                    <i className="pi pi-times text-2xl" />
+                    <i className="pi pi-times text-xl sm:text-2xl" />
                   </button>
                 </div>
 
-                <div className="w-full h-64 rounded-lg mb-6 relative overflow-hidden">
-                  <Image
-                    src="/icon-lg.png"
-                    alt="Project Preview"
-                    fill
-                    className="object-cover"
-                  />
+                <div className="w-full h-48 sm:h-64 rounded-lg mb-4 sm:mb-6 relative overflow-hidden">
+                  <Image src="/icon-lg.png" alt="Project Preview" fill className="object-cover" />
                   <div
                     className="absolute inset-0"
                     style={{
@@ -92,42 +84,39 @@ const PortfolioGallery: React.FC = () => {
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div
-                      className="w-20 h-20 rounded-full flex items-center justify-center text-4xl backdrop-blur-lg border"
+                      className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center text-2xl sm:text-4xl animate-glow"
                       style={{
                         backgroundColor: `${currentTheme.primary}20`,
                         borderColor: currentTheme.primary,
+                        boxShadow: `0 0 20px ${currentTheme.primary}40`,
                       }}
                     >
-                      <i
-                        className="pi pi-code"
-                        style={{ color: currentTheme.primary }}
-                      />
+                      <i className="pi pi-code" style={{ color: currentTheme.primary }} />
                     </div>
                   </div>
                 </div>
 
                 <p
-                  className="text-lg mb-6 leading-relaxed"
+                  className="text-base sm:text-lg mb-4 sm:mb-6 leading-relaxed"
                   style={{ color: currentTheme.textSecondary }}
                 >
                   {selectedProject.description}
                 </p>
 
-                <div className="mb-6">
+                <div className="mb-4 sm:mb-6">
                   <h4
-                    className="text-xl font-semibold mb-3"
+                    className="text-lg sm:text-xl font-semibold mb-3"
                     style={{ color: currentTheme.text }}
                   >
                     Technologies Used
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {selectedProject.technologies.map((tech) => (
+                    {selectedProject.technologies.map(tech => (
                       <span
                         key={tech}
-                        className="px-3 py-1 rounded-full border"
+                        className="px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-full glossy-border"
                         style={{
                           backgroundColor: `${currentTheme.primary}20`,
-                          borderColor: currentTheme.primary,
                           color: currentTheme.primary,
                         }}
                       >
@@ -137,13 +126,13 @@ const PortfolioGallery: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   {selectedProject.liveUrl && (
                     <a
                       href={selectedProject.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-6 py-3 rounded-lg text-center transition-colors"
+                      className="flex-1 px-4 sm:px-6 py-3 rounded-lg text-center glossy-button touch-manipulation"
                       style={{
                         backgroundColor: currentTheme.primary,
                         color: currentTheme.background,
@@ -157,7 +146,7 @@ const PortfolioGallery: React.FC = () => {
                       href={selectedProject.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-6 py-3 rounded-lg text-center border transition-colors"
+                      className="flex-1 px-4 sm:px-6 py-3 rounded-lg text-center glossy-button touch-manipulation"
                       style={{
                         borderColor: currentTheme.primary,
                         color: currentTheme.primary,

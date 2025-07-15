@@ -16,13 +16,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
 
   return (
     <div
-      className="relative group cursor-pointer overflow-hidden rounded-2xl"
+      className="relative group cursor-pointer overflow-hidden rounded-xl sm:rounded-2xl touch-manipulation"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
     >
       {/* Background Image */}
-      <div className="w-full h-64 relative">
+      <div className="w-full h-48 sm:h-56 md:h-64 relative">
         <Image
           src="/bg2.png"
           alt="Project Background"
@@ -43,7 +43,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
         {/* Project Icon */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div
-            className="w-16 h-16 rounded-full flex items-center justify-center text-3xl animate-glow"
+            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center text-2xl sm:text-3xl animate-glow"
             style={{
               backgroundColor: `${currentTheme.primary}20`,
               borderColor: currentTheme.primary,
@@ -62,10 +62,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
           backgroundColor: `${currentTheme.surface}${isHovered ? 'CC' : '99'}`,
         }}
       >
-        <div className="p-6 h-full flex flex-col justify-between">
+        <div className="p-4 sm:p-6 h-full flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold" style={{ color: currentTheme.text }}>
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <h3 className="text-lg sm:text-xl font-bold" style={{ color: currentTheme.text }}>
                 {project.title}
               </h3>
               {project.featured && (
@@ -81,13 +81,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
               )}
             </div>
 
-            <p className="text-sm mb-4 line-clamp-3" style={{ color: currentTheme.textSecondary }}>
+            <p
+              className="text-sm mb-3 sm:mb-4 line-clamp-3"
+              style={{ color: currentTheme.textSecondary }}
+            >
               {project.description}
             </p>
           </div>
 
           {/* Technologies */}
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
             {project.technologies.slice(0, 3).map(tech => (
               <span
                 key={tech}
@@ -111,13 +114,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 px-3 py-2 text-sm rounded-lg text-center glossy-button"
+                className="flex-1 px-3 py-2 text-sm rounded-lg text-center glossy-button touch-manipulation"
                 style={{
                   backgroundColor: currentTheme.primary,
                   color: currentTheme.background,
@@ -132,7 +135,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 px-3 py-2 text-sm rounded-lg text-center glossy-button"
+                className="flex-1 px-3 py-2 text-sm rounded-lg text-center glossy-button touch-manipulation"
                 style={{
                   borderColor: currentTheme.primary,
                   color: currentTheme.primary,

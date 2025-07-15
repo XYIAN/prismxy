@@ -1,31 +1,34 @@
-import React from "react";
-import { Metadata } from "next";
-import {
-  HeroSection,
-  BadgeSection,
-  PortfolioGallery,
-  PrismBackground,
-  EasterEgg,
-} from "@/components";
+import React from 'react';
+import HeroSection from '@/components/profile/HeroSection';
+import BadgeSection from '@/components/profile/BadgeSection';
+import PortfolioGallery from '@/components/portfolio/PortfolioGallery';
+import ContactSection from '@/components/contact/ContactSection';
+import PrismBackground from '@/components/visuals/PrismBackground';
+import EasterEgg from '@/components/visuals/EasterEgg';
 
-export const metadata: Metadata = {
-  title: "Prismxy | Futuristic Personal Profile Platform",
-  description:
-    "A next-gen, animated personal brand and portfolio platform. Glassmorphism, prism-inspired UI, and immersive visuals.",
-};
-
-const HomePage = () => {
+export default function Home() {
   return (
-    <>
+    <main className="relative min-h-screen">
       <PrismBackground />
       <EasterEgg />
-      <main className="relative z-10">
-        <HeroSection />
-        <BadgeSection />
-        <PortfolioGallery />
-      </main>
-    </>
-  );
-};
 
-export default HomePage;
+      {/* Hero Section */}
+      <section id="about">
+        <HeroSection />
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills">
+        <BadgeSection />
+      </section>
+
+      {/* Portfolio Section */}
+      <section id="portfolio">
+        <PortfolioGallery />
+      </section>
+
+      {/* Contact Section */}
+      <ContactSection />
+    </main>
+  );
+}
