@@ -84,24 +84,13 @@ const PrismBackground: React.FC = () => {
           src="/bg1.png"
           alt="Prismxy Background"
           fill
-          className="object-cover opacity-20"
+          className="object-cover opacity-60"
           priority
-          style={{
-            filter: 'brightness(0.2) contrast(1.1)',
-          }}
         />
       </div>
 
-      {/* Gradient Overlay */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(135deg, ${currentTheme.background}90, ${currentTheme.background}60)`,
-        }}
-      />
-
       {/* Floating Particles Canvas */}
-      <canvas ref={canvasRef} className="absolute inset-0 opacity-30" />
+      <canvas ref={canvasRef} className="absolute inset-0 opacity-80" />
     </div>
   );
 };

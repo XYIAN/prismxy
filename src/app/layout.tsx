@@ -11,6 +11,8 @@ import 'primeicons/primeicons.css';
 import 'tailwindcss/tailwind.css';
 
 import { PrimeReactProvider } from 'primereact/api';
+import PrismBackground from '@/components/visuals/PrismBackground';
+import Footer from '@/components/layout/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -84,7 +86,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={inter.className}>
-        <PrimeReactProvider>{children}</PrimeReactProvider>
+        <PrimeReactProvider>
+          <PrismBackground />
+          <div className="min-h-screen flex flex-col">
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        </PrimeReactProvider>
       </body>
     </html>
   );

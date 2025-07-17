@@ -1,5 +1,4 @@
 import React from 'react';
-import PrismBackground from '@/components/visuals/PrismBackground';
 import HeroSection from '@/components/landing/HeroSection';
 import FeaturesSection from '@/components/landing/FeaturesSection';
 import CallToActionSection from '@/components/landing/CallToActionSection';
@@ -78,8 +77,6 @@ const LANDING_DATA = {
 export default function Home() {
   return (
     <main className="relative min-h-screen">
-      <PrismBackground />
-
       <HeroSection {...LANDING_DATA.hero} />
       <FeaturesSection {...LANDING_DATA.features} />
       <CallToActionSection {...LANDING_DATA.cta} />
